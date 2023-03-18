@@ -1,0 +1,364 @@
+﻿@{
+    Layout = null;
+
+}
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="کانونی ها" />
+    <meta http-equiv="content-security-policy" content="default-src *;
+                  style-src * 'self' 'unsafe-inline' 'unsafe-eval';
+                  script-src * 'self' 'unsafe-inline' 'unsafe-eval';" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no" />
+
+    <link rel="apple-touch-icon" href="~/Content/KanooniHaWeb/images/appIcon.PNG" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/KanooniHaWeb/images/appIcon152.PNG" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/KanooniHaWeb/images/appIcon180.PNG" />
+    <link rel="apple-touch-icon" sizes="167x167" href="~/Content/KanooniHaWeb/images/appIcon167.PNG" />
+    <link rel="apple-touch-startup-image" href="~/Content/KanooniHaWeb/images/appSplash.PNG" />
+    <script src="http://www.kanoon.ir/amoozesh/scripts/jquery-1.12.4.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Scripts/timeSheet/projectList.js?id=3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64.js"></script>
+    <title>کانونی‌ها</title>
+    <link href="~/Content/KanooniHaWeb/css/mainStyle.css?id=9" rel="stylesheet">
+
+</head>
+<body style="background: linear-gradient(80deg, rgba(190, 123, 133, 0.45), #f3e8e7);">
+    <header id="header">
+        <nav id="navbar">
+            <span class="menoIcon">
+                <button onclick="openInsertNewWorkForm()" class="panel-link" id="menoIcon">
+                    <img class="menuIcon" src="~/Content/timeSheet/image/plus.png" alt="منو">
+                    <!--  <span>سلام کاربر</span>-->
+                </button>
+            </span>
+            <span class="kanooniHa" style="    color: #f997a0;
+    font-size: 4vw;
+    font-weight: 700;
+    margin-right: auto;
+    text-align: center;
+    width: 60vw;" id="mainTitle"></span>
+
+            <!--  <a href="profile.html">دانش آموز غیر کانونی</a> -->
+            <button style="background-color: rgba(0,0,0,0);
+    border: none;
+    color: #f997a0;     font-size: 3.5vw;
+    font-weight: 700;
+        width: 14vw;" id="backButton" onclick="back()">
+                بازگشت
+            </button>
+        </nav>
+    </header>
+
+
+    <div id="main-wrapper">
+        <div class="form-pop" id="EditProjectTitlePopUp" style="display: none;">
+            <div class="form-cont" id="form-cont">
+                <h1 class="popLable1" id="setEditProjectLabel"></h1>
+                <input type="text" id="EditProjectTitle" class="description" placeholder="توضیحات" />
+                <button type="submit" class="btn" onclick="EditProjectTitle()" id="formButton4" style="margin: 2% 0%;">ثبت</button>
+                <button class="btn cancel" onclick="closeEditProjectTitle()" id="formButtonC4" style="margin: 2% 0%;">بستن</button>
+            </div>
+        </div>
+
+        <div class="form-pop" id="insertNewWorkPopUp" style="display: none;">
+            <div class="form-cont" id="form-cont">
+                <h1 class="popLable1" id="setNewWorkLabel"></h1>
+                <input type="text" id="newWorkTitle" class="description" placeholder="توضیحات" />
+                <button type="submit" class="btn" onclick="insertNewproject()" id="formButton4" style="margin: 2% 0%;">ثبت</button>
+                <button class="btn cancel" onclick="closeNewWorkForm()" id="formButtonC4" style="margin: 2% 0%;">بستن</button>
+            </div>
+        </div>
+
+        <div class="form-wrapper" id="users">
+            <ul id="userList1" class="CreditList" style="width:18vw; display:none">
+            </ul>
+            <ul id="userList" class="CreditList" style="padding:0 0.6vw;">
+            </ul>
+        </div>
+        <div class="form-wrapper" id="users">
+        </div>
+
+        <div class="form-pop" id="setTimePopUp" style="display: none;">
+            <div class="form-cont" id="form-cont">
+                <h1 class="popLable1" id="setLabel"></h1>
+                <input type="text" id="description" class="description" placeholder="توضیحات" />
+                <button type="submit" class="btn" onclick="setTime()" id="formButton" style="margin: 2% 0%;">ثبت</button>
+                <button class="btn cancel" onclick="closeForm()" id="formButtonC" style="margin: 2% 0%;">بستن</button>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+    </script>
+    <style>
+        .tabButoon {
+            width: 33.33%;
+            text-align: center;
+            border-color: #f997a0;
+            border-width: 2vw;
+            padding: 3vw;
+            background-color: rgba(255,255,0,0.1);
+        }
+
+        .dateSelect {
+            height: 10vw;
+            width: 7.83vw;
+            min-width: 7.83vw;
+            padding: 0;
+            margin-right: 0;
+            margin-top: 3vw;
+            font-size: 3vw;
+            font-weight: 500;
+            border: none;
+            border-radius: 2vw;
+            background-color: antiquewhite;
+            box-shadow: 0 25px 40px -22px #3c4a56;
+        }
+
+        .dateTitle {
+            height: 10vw;
+            width: 20vw;
+            min-width: 200px;
+            padding: 2vw 0;
+            margin-right: 2.5vw;
+            margin-top: 3vw;
+            font-size: 3vw;
+            font-weight: 600;
+            border: none;
+        }
+
+        .ActiveItem {
+            color: limegreen;
+            width: 100%;
+            background-color: white;
+            border-radius: 1vw;
+            padding: 1vw 2vw 2vw 2vw;
+            margin: 1vw;
+            line-height: 1.5;
+            align-items: center;
+            font-size: 2vw;
+            min-height: 6vw;
+        }
+
+        .DeactiveItem {
+            color: orangered;
+            width: 100%;
+            background-color: white;
+            border-radius: 1vw;
+            padding: 1vw 2vw 2vw 2vw;
+            margin: 1vw;
+            line-height: 1.5;
+            align-items: center;
+            font-size: 2vw;
+            min-height: 6vw;
+        }
+
+        .UItem {
+            width: 100%;
+            background-color: white;
+            border-radius: 1vw;
+            padding: 1vw 2vw 2vw 2vw;
+            margin: 1vw;
+            line-height: 1.5;
+            align-items: center;
+            font-size: 2vw;
+            min-height: 6vw;
+        }
+
+        .listItems {
+            float: right;
+            text-align: center;
+            width: 17vw
+        }
+
+        .workListItems {
+            float: right;
+            text-align: center;
+            width: 33%;
+        }
+
+
+        .listItems0 {
+            float: right;
+            text-align: right;
+            width: 20vw;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #main-wrapper {
+            display: block;
+            margin-top: 5vw;
+        }
+
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 92vw;
+        }
+
+        .form-input {
+            margin: auto;
+            height: 100vw;
+            width: 70vw;
+            background-color: #daf3c2;
+            font-weight: 400;
+            font-size: 45px;
+            border: none;
+            border-radius: 50vw;
+            padding: 10vw;
+            box-shadow: 0 25px 40px -22px #3c4a56;
+        }
+
+
+        #navbar .menuUserPic {
+            width: 20vw;
+            height: 20vw;
+            border-radius: 50%;
+        }
+
+        .userName {
+            font-size: 5vw;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            display: block;
+            margin: 4vw 8px 0;
+        }
+
+        .stopwatch {
+            font-size: 4vw;
+            text-align: center;
+        }
+
+
+
+        .form-pop {
+            margin: auto;
+            width: 100%;
+            display: none;
+            position: absolute;
+            z-index: 99999;
+        }
+
+        .form-cont {
+            width: 65vw;
+            margin: auto;
+            padding: 3vw;
+            background-color: white;
+            border-radius: 40px;
+        }
+
+        .popLable1 {
+            font-size: 5vw;
+            text-align: center;
+            color: #e54d60;
+            line-height: 1.5em;
+            margin: 2vw
+        }
+
+        .popLable2 {
+            font-size: 4vw;
+            text-align: center;
+            color: black;
+            line-height: 1.5em;
+            margin: 2vw
+        }
+
+        .form-cont .btn {
+            background-color: #74e804;
+            color: black;
+            padding: 2vw;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 2vw;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .form-cont .cancel {
+            background-color: #e54d60;
+        }
+
+        .description {
+            width: 100%;
+            height: 25vw;
+            border-color: #e54d60;
+            border-width: 1vw;
+            border-radius: 50px;
+            font-size: 3vw;
+            padding: 1vw;
+        }
+
+
+
+
+        .btn {
+            background-color: green;
+            color: white;
+            padding: 4%;
+            border-radius: 7px;
+            margin: 3% 14%;
+        }
+
+        .cancel {
+            background-color: orangered;
+        }
+
+        button {
+            border: none;
+            text-decoration: none;
+            color: #f997a0;
+            font-weight: normal;
+            font-size: 45px;
+            background-color: rgba(0,0,0,0);
+        }
+
+
+        .predictdate {
+            width: 100%;
+            background-color: #a281c38c;
+            color: white;
+            padding: 4%;
+            border-radius: 7px;
+            font-size: 4vw;
+            text-align: center;
+        }
+
+        .finishButton {
+            border: none;
+            margin-top: 1vw;
+            text-decoration: none;
+            color: black;
+            font-weight: normal;
+            font-size: 3.5vw;
+            padding: 2vw;
+            border-radius: 2vw;
+            background-color: #f7092a69;
+        }
+
+
+        .startButton {
+            border: none;
+            margin-top: 1vw;
+            text-decoration: none;
+            color: black;
+            font-weight: normal;
+            font-size: 3.5vw;
+            padding: 2vw;
+            border-radius: 2vw;
+            background-color: #09f768a6;
+        }
+
+    </style>
+</body>
+</html>

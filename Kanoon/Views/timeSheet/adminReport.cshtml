@@ -1,0 +1,360 @@
+﻿@{
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="‌تایم شیت کانون" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no" />
+    <meta http-equiv="content-security-policy" content="default-src *;
+                  style-src * 'self' 'unsafe-inline' 'unsafe-eval';
+                  script-src * 'self' 'unsafe-inline' 'unsafe-eval';" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/timeSheet/image/timeSheetIcon.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/timeSheet/image/timeSheetIcon.jpg" />
+    <link rel="apple-touch-icon" sizes="167x167" href="~/Content/timeSheet/image/timeSheetIcon.jpg" />
+    @*<link rel="apple-touch-startup-image" href="~/Content/KanooniHaWeb/images/appSplash.PNG" />*@
+    @*<script src="http://www.kanoon.ir/amoozesh/scripts/jquery-1.12.4.min.js"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="~/Scripts/timeSheet/adminReport.js?id=36"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64.js"></script>*@
+
+    <title>‌تایم شیت کانون</title>
+
+    <link href="~/Content/KanooniHaWeb/css/mainStyle.css?id=9" rel="stylesheet">
+
+</head>
+
+<body style="background: linear-gradient(80deg, rgba(190, 123, 133, 0.45), #f3e8e7);">
+
+
+    <header id="header">
+        <nav id="navbar" style="padding: 2vw;">
+
+            <span class="menoIcon">
+                <a href="javascript:void(0);" class="panel-link" id="menoIcon">
+                    <img class="menuIcon" src="~/Content/timeSheet/image/menuIcon.png" alt="منو">
+                </a>
+            </span>
+            <span class="kanooniHa" style="color: #f997a0; font-size:3vw; margin-right: auto" id="mainTitle">همکاران کانون</span>
+
+            <div class="overlay" style="background: rgba(214, 181, 184, 0.62);">
+                <div class="rightSlidebar">
+                    <div class="userData">
+                        <img class="menuUserPic" src="~/Content/timeSheet/image/menuAvatar.png" alt="">
+                        <span class="userName" id="name"></span>
+
+                    </div>
+                    <ul class="slidebarItems">
+                        <li class="menuli"><button class="menuList" style="text-align:right;" onclick="getProjects()">📃 لیست پروژه‌ها</button></li>
+                        <li class="menuli"><button class="menuList" style="text-align:right;" onclick="getDefinedWorks()">📃 لیست کارهای تعریف شده </button></li>
+                        <li class="menuli"><button class="menuList" style="text-align:right;" onclick="getWorkTitleUsers()">📃 لیست کار کاربران</button></li>
+                        <li class="menuli"><button class="menuList" style="text-align:right;" onclick="getUserVerifyWorks()">📃 تایید تعریف کار کاربران</button></li>
+                        <li class="menuli"><button class="menuList" style="text-align:right;" onclick="setAllUsersWorkTitles()" id="allWorks">📃 لیست کار کاربران در یک نگاه</button></li>
+                        <li class="menuli"><button class="menuList" style="text-align:right;" onclick="openPayroll()">📃 پنل کارمزد کاربران </button></li>
+
+                        <li class="menuli">
+                            <button class="menuList" onclick="version()">
+                                📱شماره ورژن
+                                <script>function version() { alert('نسخه ۱.۰.۱'); }</script>
+                            </button>
+                        </li>
+
+
+
+                        <li class="menuli">
+                            <button class="menuList" style="background-color: rgba(0,0,0,0); border: none; " onclick="exit()">
+                                🚪 خروج
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                @*<div id="dialogoverlay" style="width:100%; height:100%"></div>*@
+
+            </div>
+            <button style="background-color: rgba(0,0,0,0); border: none; color: #f997a0; display:none; font-size:3.5vw" id="backButton">
+                بازگشت
+            </button>
+        </nav>
+        <div id="workTitleTop" style="display:none"><button class="tabButoon" onclick="setWorkType(1)" id="currentWorks">در حال انجام</button><button class="tabButoon" onclick="setWorkType(2)" id="doneWorks"> انجام شده</button></div>
+
+    </header>
+    <div id="dateContainer" class="dateContainer" style="padding: 2vw 1vw 0; display:none">
+        <span class="dateTitle">ازتاریخ: </span>
+        <select name="dateList1" class="dateSelect" id="day1"></select>
+        <select name="dateList1" class="dateSelect" id="mount1"></select>
+        <select name="dateList1" class="dateSelect" id="year1" style="width:9vw"></select>
+
+        <span class="dateTitle">تا تاریخ: </span>
+        <select name="dateList2" class="dateSelect" id="day2"></select>
+        <select name="dateList2" class="dateSelect" id="mount2"></select>
+        <select name="dateList2" class="dateSelect" id="year2" style="width:9vw"></select>
+
+
+        <button class="dateSelect" id="DateButton1" onclick="getUsers1()" style="display:none; background-color:greenyellow; margin-right: 1.5vw; color: black; font-weight: 600; float: left; width: 12vw;">اعمال</button>
+        <button class="dateSelect" id="DateButton2" onclick="getUsers2()" style="display:none; background-color:greenyellow; margin-right: 1.5vw; color: black; font-weight: 600; float: left;  width: 12vw;">اعمال</button>
+        <button class="dateSelect" id="DateButton3" onclick="openUserWorkTitles()" style="display:none; background-color:greenyellow; margin-right: 2.5vw; color: black; font-weight: 600; float: left;  width: 12vw;">اعمال</button>
+
+    </div>
+    <div id="main-wrapper" style="min-height: calc(100vh - 40vw);">
+
+
+        <div class="form-wrapper" id="users">
+            <ul id="userList" class="CreditList">
+            </ul>
+        </div>
+
+        <div class="form-pop" id="setTimePopUp" style="display: none;">
+            <div class="form-cont" id="form-cont">
+                <h1 style="font-size:5vw; text-align: center; color: #e54d60; margin:2vw" id="setLabel"></h1>
+                <input type="text" id="description" class="description" placeholder="توضیحات" />
+                <button type="submit" class="btn" onclick="setTime()" id="formButton" style="margin: 2% 0%;">ثبت</button>
+                <button class="btn cancel" onclick="closeForm()" id="formButtonC" style="margin: 2% 0%;">بستن</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div id="dialogoverlay" style="width:100%; height:100%"></div>
+
+    <div id="loading" class="loaderBack"> <div class="loader"></div></div>
+
+
+
+    <style>
+        .tabButoon {
+            width: 50%;
+            text-align: center;
+            border-color: #f997a0;
+            border-width: 2vw;
+            padding: 3vw;
+            background-color: rgba(255,255,0,0.1);
+        }
+
+        .dateContainer {
+            max-width: 95vw;
+            margin: auto;
+        }
+
+        .dateSelect {
+            height: 10vw;
+            width: 7.83vw;
+            min-width: 7.83vw;
+            padding: 0;
+            margin-right: 0;
+            margin-top: 3vw;
+            font-size: 3vw;
+            font-weight: 500;
+            border: none;
+            border-radius: 2vw;
+            background-color: antiquewhite;
+            box-shadow: 0 25px 40px -22px #3c4a56;
+        }
+
+        .dateTitle {
+            height: 10vw;
+            width: 20vw;
+            min-width: 200px;
+            padding: 2vw 0;
+            margin-right: 2.5vw;
+            margin-top: 3vw;
+            font-size: 3vw;
+            font-weight: 600;
+            border: none;
+        }
+
+        ul {
+            list-style: none;
+            margin: auto;
+        }
+
+        .ActiveItem {
+            color: limegreen;
+            width: 100%;
+            background-color: white;
+            border-radius: 1vw;
+            padding: 1vw 2vw 2vw 2vw;
+            margin: 1vw;
+            line-height: 1.5;
+            align-items: center;
+            font-size: 2vw;
+            min-height: 6vw;
+        }
+
+        .DeactiveItem {
+            color: orangered;
+            width: 100%;
+            background-color: white;
+            border-radius: 1vw;
+            padding: 1vw 2vw 2vw 2vw;
+            margin: 1vw;
+            line-height: 1.5;
+            align-items: center;
+            font-size: 2vw;
+            min-height: 6vw;
+        }
+
+        .UItem {
+            width: 100%;
+            background-color: white;
+            border-radius: 1vw;
+            padding: 1vw 2vw 2vw 2vw;
+            margin: 1vw;
+            line-height: 1.5;
+            align-items: center;
+            font-size: 2vw;
+            min-height: 6vw;
+        }
+
+        .listItems {
+            float: right;
+            text-align: center;
+            width: 17vw
+        }
+
+        .workListItems {
+            float: right;
+            text-align: center;
+            width: 100%;
+        }
+
+        #main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+        }
+
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 92vw;
+        }
+
+        .form-input {
+            margin: auto;
+            height: 70vw;
+            width: 70vw;
+            background-color: #daf3c2;
+            font-weight: 400;
+            font-size: 45px;
+            border: none;
+            border-radius: 50vw;
+            padding: 10vw;
+            box-shadow: 0 25px 40px -22px #3c4a56;
+        }
+
+
+        #navbar .menuUserPic {
+            width: 20vw;
+            height: 20vw;
+            border-radius: 50%;
+        }
+
+        .userName {
+            font-size: 5vw;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            display: block;
+            margin: 4vw 8px 0;
+        }
+
+        .stopwatch {
+            font-size: 4vw;
+            text-align: center;
+        }
+
+
+
+        .form-pop {
+            margin: auto;
+            display: none;
+            position: absolute;
+            z-index: 99999;
+        }
+
+        .form-cont {
+            width: 65vw;
+            padding: 3vw;
+            background-color: white;
+            border-radius: 40px;
+        }
+
+            .form-cont .btn {
+                background-color: #74e804;
+                color: black;
+                padding: 2vw;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 2vw;
+                opacity: 0.8;
+                font-weight: 600;
+            }
+
+            .form-cont .cancel {
+                background-color: #e54d60;
+            }
+
+        .description {
+            width: 100%;
+            height: 25vw;
+            border-color: #e54d60;
+            border-width: 1vw;
+            border-radius: 50px;
+            font-size: 3vw;
+            padding: 1vw;
+        }
+
+
+
+
+        .btn {
+            background-color: green;
+            color: white;
+            padding: 4%;
+            border-radius: 7px;
+            margin: 3% 14%;
+        }
+
+        .cancel {
+            background-color: orangered;
+        }
+
+        button {
+            border: none;
+            text-decoration: none;
+            color: #f997a0;
+            font-weight: normal;
+            font-size: 45px;
+            background-color: rgba(0,0,0,0);
+        }
+    </style>
+</body>
+</html>
+
+

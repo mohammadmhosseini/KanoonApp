@@ -1,0 +1,280 @@
+﻿@{
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="‌تایم شیت کانون" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.4, maximum-scale=0.4, user-scalable=no" />
+    <meta http-equiv="content-security-policy" content="default-src *;
+                  style-src * 'self' 'unsafe-inline' 'unsafe-eval';
+                  script-src * 'self' 'unsafe-inline' 'unsafe-eval';" />
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/timeSheet/image/timeSheetIcon.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/timeSheet/image/timeSheetIcon.jpg" />
+    <link rel="apple-touch-icon" sizes="167x167" href="~/Content/timeSheet/image/timeSheetIcon.jpg" />
+    @*<link rel="apple-touch-startup-image" href="~/Content/KanooniHaWeb/images/appSplash.PNG" />*@
+    @*<script src="http://www.kanoon.ir/amoozesh/scripts/jquery-1.12.4.min.js"></script>*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="~/Scripts/timeSheet/main.js?id=21"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64.js"></script>*@
+
+    <title>‌تایم شیت کانون</title>
+
+    <link href="~/Content/KanooniHaWeb/css/mainStyle.css?id=9" rel="stylesheet">
+
+</head>
+
+<body style="background: linear-gradient(80deg, rgba(190, 123, 133, 0.45), #f3e8e7);">
+
+    <header id="header">
+        <nav id="navbar">
+
+            <span class="menoIcon">
+                <a href="javascript:void(0);" class="panel-link" id="menoIcon">
+                    <img class="menuIcon" src="~/Content/timeSheet/image/menuIcon.png" alt="منو">
+                    <!--  <span>سلام کاربر</span>-->
+                </a>
+            </span>
+            <span class="kanooniHa" style="color: #f997a0;">کانونی ها</span>
+
+            <div class="overlay" style="background: rgba(214, 181, 184, 0.62);">
+                <div class="rightSlidebar">
+                    <div class="userData">
+                        <img class="menuUserPic" src="~/Content/timeSheet/image/menuAvatar.png" alt="">
+                        <span class="userName" id="name"></span>
+
+                    </div>
+                    <ul class="slidebarItems">
+
+                        <li><button id="reportList" onclick="openReport()">📃 گزارش روزانه</button></li>
+                        <li><button id="workList" onclick="openWorkList()">📃 لیست کارهای من</button></li>
+
+                        <li>
+                            <button class="" onclick="version()">
+                                📱شماره ورژن
+                                <script>function version() { alert('نسخه ۱.۰.۱'); }</script>
+                            </button>
+                        </li>
+
+
+
+                        <li>
+                            <button style="background-color: rgba(0,0,0,0);
+    border: none;
+    " onclick="back()">
+                                🚪 خروج
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+    </header>
+
+    <div id="main-wrapper">
+        <div class="form-wrapper">
+            <div class="form-input" id="duration" style="display:none"></div>
+            <div class="form-input" id="clock"><button class="clockButton" id="clockButton" onclick="openForm()"></button></div>
+        </div>
+        <div class="form-pop" id="setTimePopUp" style="display: none;">
+            <div class="form-cont" id="form-cont">
+                <h1 style="font-size:5vw; text-align: center; color: #e54d60; margin:2vw" id="setLabel"></h1>
+                <select name="selectProject" class="form-select" onchange="getDefinedWork(this.value)" id="selectProject" style=" height: inherit; padding: 5px; margin-bottom: 0px; display:none"></select>
+                <select name="selectDefinedWork" class="form-select" onchange="getWork(this.value)" id="selectDefinedWork" style=" height: inherit; padding: 5px; margin-bottom: 0px; display:none"></select>
+                <select name="selectWork" class="form-select" id="selectWork" style=" height: inherit; padding: 5px; margin-bottom: 5px; display:none"></select>
+                <input type="text" id="description" class="description" placeholder="توضیحات" />
+                <button type="submit" class="btn" onclick="setTime()" id="formButton" style="margin: 2% 0%;">ثبت</button>
+                <button class="btn cancel" onclick="closeForm()" id="formButtonC" style="margin: 2% 0%;">بستن</button>
+            </div>
+        </div>
+
+        <div class="form-pop" id="insertNewWorkPopUp" style="display: none;">
+            <div class="form-cont" id="form-cont">
+                <h1 style="font-size:5vw; text-align: center; color: #e54d60; margin:2vw" id="setNewWorkLabel"></h1>
+                <input type="text" id="newWorkTitle" class="description" placeholder="توضیحات" />
+                <button type="submit" class="btn" onclick="insertNewWorkTitle()" id="formButton" style="margin: 2% 0%;">ثبت</button>
+                <button class="btn cancel" onclick="closeNewWorkForm()" id="formButtonC" style="margin: 2% 0%;">بستن</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dialogbox">
+        <div>
+            <div id="dialogboxhead"></div>
+            <div id="dialogboxbody"></div>
+            <div id="dialogboxfoot"></div>
+        </div>
+    </div>
+
+
+    <div id="dialogoverlay" style="width:100%; height:100%"></div>
+
+
+
+
+    <div id="loading" class="loaderBack"> <div class="loader"></div></div>
+
+
+
+    <style>
+        #main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+        }
+
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 70vw;
+        }
+
+        .form-input {
+            margin: auto;
+            height: 70vw;
+            width: 70vw;
+            background-color: #daf3c2;
+            font-weight: 400;
+            font-size: 45px;
+            border: none;
+            border-radius: 50vw;
+            padding: 10vw;
+            box-shadow: 0 25px 40px -22px #3c4a56;
+        }
+
+
+        #navbar .menuUserPic {
+            width: 20vw;
+            height: 20vw;
+            border-radius: 50%;
+        }
+
+        .userName {
+            font-size: 5vw;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            display: block;
+            margin: 4vw 8px 0;
+        }
+
+        .stopwatch {
+            font-size: 4vw;
+            text-align: center;
+        }
+
+        .duration {
+            margin: auto;
+            text-align: center;
+            font-size: 7vw;
+            font-weight: 600;
+            margin-top: 7vw;
+            color: #e54a5d;
+        }
+
+        .clock {
+            margin: auto;
+            margin-top: 35vw;
+            width: 70vw;
+            height: 70vw;
+            background-color: #daf3c2;
+            border-radius: 406px;
+            padding: 10vw;
+        }
+
+        .clockButton {
+            display: block;
+            margin: auto;
+            background-color: lawngreen;
+            width: 50vw;
+            height: 50vw;
+            font-weight: 600;
+            font-size: 7vw;
+            border-radius: 50vw;
+            color: black;
+            text-align: center;
+        }
+
+        .form-pop {
+            margin: auto;
+            display: none;
+            position: absolute;
+            /* bottom: 25%; */
+            /* right: 35%; */
+            z-index: 99999;
+        }
+
+        .form-cont {
+            width: 65vw;
+            padding: 3vw;
+            background-color: white;
+            border-radius: 40px;
+        }
+
+            .form-cont .btn {
+                background-color: #74e804;
+                color: black;
+                padding: 2vw;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 2vw;
+                opacity: 0.8;
+                font-weight: 600;
+            }
+
+            .form-cont .cancel {
+                background-color: #e54d60;
+            }
+
+        .description {
+            width: 100%;
+            height: 25vw;
+            border-color: #e54d60;
+            border-width: 1vw;
+            border-radius: 50px;
+            font-size: 3vw;
+            padding: 1vw;
+        }
+
+
+
+
+        .btn {
+            background-color: green;
+            color: white;
+            padding: 4%;
+            border-radius: 7px;
+            margin: 3% 14%;
+        }
+
+        .cancel {
+            background-color: orangered;
+        }
+
+        button {
+            border: none;
+            text-decoration: none;
+            color: #f997a0;
+            font-weight: normal;
+            font-size: 45px;
+            background-color: rgba(0,0,0,0);
+        }
+    </style>
+</body>
+</html>
+
+
