@@ -1,0 +1,588 @@
+@import 'normalize.css';
+@import 'fonts.css';
+html {
+    font-family: 'vazir'
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+textarea,
+input,
+select,
+button {
+    font-family: inherit;
+}
+
+body {
+    background: linear-gradient(80deg, rgb(96, 196, 241), #f1e9e9);
+    min-height: 100vh;
+    color: #000;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    /*
+	width: 320;
+	margin: auto;
+    */
+}
+
+#content {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0px;
+	z-index: 99999;
+	display:none;
+}
+
+/********* main header*******/
+.loaderBack {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background: rgba(4, 54, 76, 0.2);
+	position: fixed;
+	display: none;
+	z-index: 9999999;
+}
+.loader {
+	border: 16px solid #f3f3f3; /* Light grey */
+	border-top: 16px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+	z-index: 9999999;
+	margin: auto;
+	margin-top: 75%;
+	position: relative;
+}
+
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#header {
+	background-color: rgba(255, 255, 255, .7);
+	/*position: fixed;
+	top: 0;
+	width: 100%;*/
+}
+
+#navbar {
+	
+    padding: 45px;
+    border-bottom: 2px solid rgba(255, 255, 255, .2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+	font-size: 40px;
+	/*z-index:99;*/
+	
+	
+}
+
+#navbar a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: rgb(24,107,164);
+    font-weight: normal;
+}
+
+#navbar img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.kanooniHa {
+    margin: auto;
+    font-size: 50px;
+    font-weight: 700;
+    margin-right: 32%;
+    color: #3481b9;
+    align-items: center;
+}
+
+	#navbar .overlay {
+		/*position: fixed;*/
+		position:absolute;
+		top: 140px;
+		right: 0;
+		background: rgba(4, 54, 76, 0.8);
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		display: none;
+		transition: all 0.5s ease;
+		
+	}
+
+	#navbar .show {
+		display: block !important;
+		transition: all 0.5s ease;
+	
+	}
+
+	#navbar .rightSlidebar {
+		width: 55%;
+		height: 100%;
+		background: #fff;
+		top: 0;
+		margin: 0;
+		transition: all 0.5s ease;
+	}
+
+#navbar .menuUserPic {
+	width: 150px; 
+	height: 150px;
+	border-radius: 50%;
+}
+
+#navbar .slidebarItems{
+	width: 100%;
+	margin-top: 50px;
+}
+
+.slidebarItems li {
+	width: 100%;
+	padding: 50px 36px;
+	padding-right: 20px;
+	color: #555;
+	font-size: 40px;
+	font-weight: 600;
+	list-style: none;
+}
+
+ .slidebarItems li a{
+	text-decoration: none;
+}
+
+
+.userData{
+	width: 100%;
+	background: #888;
+	padding: 50px;
+	padding-bottom: 90px;
+	margin-bottom: 30px;
+	box-shadow: 0px 2px 10px 1px rgba(0 , 0 , 0 , 0.4)
+}
+
+ .menuUserPic{
+	display: block;
+	 margin: 0 auto;
+}
+
+.userName{
+	font-size: 45px;
+	text-align: center;
+	display: block;
+	margin: 20px 0 8px 0;
+}
+
+.yourCredit{
+	font-size: 30px;
+	text-align: center;
+	display: block;
+	margin: 30px 0 8px 0;
+}
+
+.creditL {
+	opacity: 0.6;
+}
+
+#navbar .panel-link {
+    flex-grow: 1;
+}
+
+/******** end of main header***************/
+
+/**************** container *******************/
+
+
+table {
+   
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 0.6em;
+    overflow: hidden;
+    align-items: center;
+}
+
+
+td, th {
+    text-align: center;
+    border: 2px solid #a281c3;
+    padding: 8px;
+    font-size:30px;
+}
+
+th{
+    background-color:dimgray;
+    color:white;
+}
+
+
+
+ .container {
+	 display:none;
+	width: 100%;
+	/*margin-top: 120px;*/
+
+     padding:40px;		 
+}
+
+.p100  {
+/*	background: #fff;*/
+	width: 100%;
+	height: 300px;
+	padding: 10px 10px;
+/*	position: fixed;*/
+	float: right;
+}
+
+.p100 img{
+	width: 100%;
+	height: 100%;
+}
+
+
+.p50  {
+    width: 50%;
+	height: 300px;
+	padding: 10px 10px;
+/*	position: absolute;*/
+	float: left;
+}
+.p25 {
+    width: 25%;
+    height: 100px;
+    padding: 10px 10px;
+    background: blueviolet;
+    color: white;
+    /*	position: absolute;*/
+    float: left;
+    border-radius: 30px;
+    text-align: center;
+    margin-bottom: 2px;
+    cursor:ew-resize;
+}
+
+.p25:hover{
+   
+    opacity:0.5;
+}
+
+
+.p51 {
+    width: 50%;
+    height: 350px;
+    padding: 10px 10px;
+    background-color:purple;
+    color: white;
+    /*	position: absolute;*/
+    float: left;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.p50Num {
+    width: 50%;
+    height: 100px;
+    padding: 10px 10px;
+    color: black;
+    /*	position: absolute;*/
+    float: left;
+    border-radius: 10%;
+    text-align: center;
+    font-size: 59px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.p51:hover {
+    opacity: 0.5;
+}
+
+.DLTitle {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    font-size: 50px;
+    font-weight: 700;
+    color: #3481b9;
+    align-items: center;
+    text-align: center;
+}
+
+
+.testTitel {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    font-size: 45px;
+    font-weight: 600;
+    color: #3481b9;
+    align-items: center;
+    text-align: center;
+    background-color: gold;
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+.testTitel option{
+    text-align:center;
+
+}
+
+.p50 img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.inActive {
+	opacity: 0.5;
+	filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+
+
+/****************************************************/
+
+.jashnvareh {
+	margin-top: 10px;
+	width: 100%;
+	height: 100%;
+}
+/***********************popUps****************************/
+
+/*
+input[type=text], input[type=password]{
+	width: 90%;
+	padding: 12px 20px;
+	margin: 8px 26px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	font-size: 16px;
+}
+*/
+
+.siteButton {
+	background-color: #4caf50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 26px;
+	border: none;
+	cursor: pointer;
+	width: 90%;
+	font-size: 20px;
+	
+}
+
+button {
+	border: none;
+	text-decoration: none;
+    color: rgb(24,107,164);
+    font-weight: normal;
+	font-size: 45px;
+	background-color: rgba(0,0,0,0);
+	
+}
+
+button:hover{
+	opacity: 0.8;
+}
+
+.imgcontainer{
+	text-align: center;
+	margin: 24px 12px 0;
+	position: relative;
+}
+
+.avatar{
+	width: 200px; 
+	height: 200px;
+	border-radius: 50%;
+}
+	
+
+
+
+ul {
+	list-style: none;
+	margin: auto;
+}
+
+/* work book popup */
+
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: absolute;
+  bottom: 25%;
+  right: 35%;	
+  border: 3px solid #f1f1f1;
+  z-index: 99999;
+}
+
+/* Add styles to the form container */
+.pwb-container {
+    position: fixed;
+    max-width: 96%;
+    margin: auto;
+    padding: 30px;
+    background-color: white;
+    top: 12%;
+    left: 2%;
+}
+
+.form-container {
+    position: fixed;
+    width: 80vw;
+    padding: 4vw;
+    background-color: white;
+    top: 65vw;
+    left: 10vw;
+}
+
+.form-select{
+    height: 100px;
+    width: 100%;
+    min-width: 200px;
+    padding: 10px;
+    margin-bottom: 30px;
+	margin-top:30px;
+	font-size:30px;
+    font-weight: 300;
+    border: none;
+    border-radius: 5px;
+    background-color: antiquewhite;
+    box-shadow: 0 25px 40px -22px #3c4a56;   
+}
+
+/* Full-width input fields */
+
+/* Set a style for the submit/login button */
+.pwb-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+
+.form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 2vw;
+    margin: 0 0 1vw 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.8;
+}
+
+.form-popup .btn cancel {
+    background-color: #4CAF50;
+    color: white;
+    color: white;
+    padding: 2vw;
+    margin: 0 0 1vw 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.8;
+}
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+/* end of workbook popup */
+
+/* dialog box */
+#dialogoverlay{
+	display: none;
+	opacity: .7;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: #FFF;
+	width: 100%;
+	z-index: 10;
+}
+#dialogbox{
+	display: none;
+	position: fixed;
+	background: linear-gradient(135deg, rgba(30, 187, 202, 1), rgba(235, 188, 167, 1));
+	border-radius:7px; 
+	width:750px;
+	z-index: 10;
+}
+#dialogbox > div{ background:#FFF; margin:8px; }
+
+#dialogbox > div > #dialogboxhead{ background: linear-gradient(135deg, rgba(30, 187, 202, 0.6), rgba(235, 188, 167, 0.6)); font-size:40px; padding:30px; color:#000; }
+#dialogbox > div > #dialogboxbody{ background: rgba(235, 188, 167, 0.6); padding:60px; color:#161b1f;  font-size:40px;}
+#dialogbox > div > #dialogboxfoot{ background: linear-gradient(135deg, rgba(30, 187, 202, 0.6), rgba(235, 188, 167, 0.6)); padding:30px; text-align:right; font-size:30px;}
+/* end of dialog box */
+
+
+/*match questions*/
+
+.question {
+	width: 100%;
+	height: 300px;
+	padding: 10px 10px;
+	/*	position: fixed;*/
+	float: right;
+}
+
+.question img {
+	width: 100%;
+	height: 100%;
+}
+
+
+.Qoption {
+	width: 20%;
+	height: 80px;
+	padding: 10px 10px;
+	/*	position: fixed;*/
+	float: right;
+ background-image: url('../images/match/matchQoption.png');
+}
+/*end of match questions*/

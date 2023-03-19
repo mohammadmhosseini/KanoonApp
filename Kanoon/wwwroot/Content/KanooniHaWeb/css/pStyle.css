@@ -1,0 +1,193 @@
+@import 'normalize.css';
+@import 'fonts.css';
+html {
+    font-family: 'vazir';
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+textarea,
+input,
+select,
+button {
+    font-family: inherit;
+}
+
+body {
+    background: linear-gradient(80deg, rgb(96, 196, 241), #f1e9e9);
+    min-height: 100vh;
+    color: #fff;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/********* main header*******/
+button {
+	border: none;
+	text-decoration: none;
+	font-weight: normal;
+	background-color: rgba(0,0,0,0);
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin-left: 40px;
+	margin-top: 0;
+	padding: 0;
+	font-size: 40px;
+}
+
+#header{
+		background-color: rgba(255, 255, 255, .7)
+}
+
+#navbar {
+	padding: 45px;
+	border-bottom: 2px solid rgba(255, 255, 255, .2);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	font-size: 40px;
+}
+
+#navbar a {
+		margin-right: 15px;
+		text-decoration: none;
+		color: rgb(24,107,164);
+		font-weight: normal;
+		
+	}
+
+#navbar img {
+	
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+
+	
+}
+
+#navbar .panel-link {
+	
+    flex-grow: 1;
+	
+}
+
+
+	#navbar button {
+		border: none;
+		text-decoration: none;
+		color: rgb(24,107,164);
+		font-weight: normal;
+		font-size: 45px;
+		background-color: rgba(0,0,0,0);
+		width: auto;
+		height:auto;
+		margin-left:20px;
+		
+	}
+
+/******** end of main header***************/
+
+ul{
+	
+	list-style: none;
+	margin: auto;
+	
+}
+
+.mlist{
+	
+	margin: 80px 40px 80px 85px;
+	
+}
+
+.mlist li{
+	
+	margin: 10px;
+	padding: 60px;
+	width: 100%;
+	height: 700px;
+	
+/*	align-items: center;*/
+	color: black;
+	background-color: white;
+	border-radius: 30px;
+	text-align: justify
+/*	align-content: center;*/
+
+}
+
+.mlist li a{
+	text-decoration: none;
+	color: black;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+ img{
+
+	margin-top: 30px;
+/*	margin: 10px;*/
+	width: 100%;
+	height: 70%;
+/*	align-self: center;*/
+	border-radius: 20px;
+}
+
+.hasSeen{
+	color: blue;
+}
+
+
+
+
+
+li button img {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	margin-top: 7px;
+	width: 80px;
+	height: 80px;
+	border: none;
+	text-decoration: none;
+	font-weight: normal;
+	background-color: rgba(0,0,0,0);
+	float: left;
+	/*margin-left: 40px;*/
+	padding: 0;
+	font-size: 40px;
+}
+
+
+
+
+.likeImg {
+
+	
+}
+
+
+.creditlist {
+	margin: 80px 40px 80px 85px;
+}
+
+.cItem {
+	margin: 10px;
+	padding: 60px;
+	width: 100%;
+	height: 300px;
+	/*	align-items: center;*/
+	color: black;
+	background-color: white;
+	border-radius: 30px;
+	line-height: 2em;
+	font-size: 35px;
+	text-align: justify
+	/*	align-content: center;*/
+}
