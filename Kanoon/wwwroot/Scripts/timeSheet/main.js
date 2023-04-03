@@ -185,7 +185,7 @@ $(document).ready(function () {
             document.getElementById('clockButton').style.backgroundColor = "lawngreen";
             document.getElementById('clockButton').innerHTML = "شروع";
 
-            if (returnedData.Data.HeadRoleId == 1) {
+            if (returnedData.data.headRoleId == 1) {
                 getUserWorksList();
             }
         }
