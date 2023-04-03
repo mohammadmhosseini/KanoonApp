@@ -1,16 +1,35 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Kanoon.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Kanoon.Common.Common;
 
 namespace Kanoon.Controllers
 {
-    [Route("[controller]")]
+    [Route("TimeSheetApi")]
     [ApiController]
     public class TimeSheetApiController : ControllerBase
     {
+        public int currentyear = 100;
+        private readonly AppDbContext _appDbContext;
+
+        public TimeSheetApiController(AppDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+        }
+
         #region Login
-        [Route("login")]
-        [HttpPost]
-        public dynamic login([FromBody] loginArg arg)
+
+        public class loginArg
+        {
+
+
+            public string nationalCode { set; get; }
+
+
+        }
+
+        [HttpPost("login")]
+        public dynamic login([FromForm] loginArg arg)
         {
 
             var resp = new AppResponse()
@@ -19,16 +38,17 @@ namespace Kanoon.Controllers
             };
             try
             {
-                var user = new App().tblTimeSheetUser.FirstOrDefault(a => a.Password == arg.nationalCode);
+                var user = _appDbContext.tblTimeSheetUser.FirstOrDefault(a => a.Password == arg.nationalCode);
                 //string[] testDays = new string[12];
                 if (user != null)
                 {
 
-                    user.isActive = true;
+                    user.IsActive = true;
                     user.LoginDate = DateTime.Now;
 
 
-                    BL<tblTimeSheetUser>.Update(user);
+                    _appDbContext.tblTimeSheetUser.Update(user);
+                    _appDbContext.SaveChanges();
                     resp.Data = new
                     {
                         success = 1,
@@ -59,7 +79,7 @@ namespace Kanoon.Controllers
                     success = -1
                 };
             }
-            return Json(resp);
+            return new JsonResult(resp);
         }
         #endregion
     }
