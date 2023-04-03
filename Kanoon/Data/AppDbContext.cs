@@ -11,4 +11,7 @@ public class AppDbContext : DbContext
 
 	public DbSet<tblTimeSheetDefinedWork> tblTimeSheetDefinedWork { get; set; }
 	public DbSet<tblTimeSheetUser> tblTimeSheetUser { get; set; }
+	public DbSet<tblTimeSheetUserWork> tblTimeSheetUserWork { get; set; }
+	public DbSet<tblTimeSheetUserWorkTitle> tblTimeSheetUserWorkTitle { get; set; }
+	public DbSet<tblTimeSheetProject> tblTimeSheetProject { get; set; }
 }
