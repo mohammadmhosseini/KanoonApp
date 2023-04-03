@@ -95,7 +95,7 @@ namespace Kanoon.Controllers
 
         [HttpPost("getTime")]
         //[Authorize]
-        public dynamic getTime([FromBody] getTimeArg arg)
+        public dynamic getTime([FromForm] getTimeArg arg)
         {
 
             var resp = new AppResponse()
@@ -156,7 +156,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("setStartTime")]
-        public dynamic setStartTime([FromBody] setStartTimeArg arg)
+        public dynamic setStartTime([FromForm] setStartTimeArg arg)
         {
 
             var resp = new AppResponse()
@@ -231,7 +231,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("setEndTime")]
-        public dynamic setEndTime([FromBody] setEndTimeArg arg)
+        public dynamic setEndTime([FromForm] setEndTimeArg arg)
         {
 
             var resp = new AppResponse()
@@ -332,7 +332,7 @@ namespace Kanoon.Controllers
 
         [HttpPost("startNewWork")]
         //[Authorize]
-        public async Task<dynamic> startNewWork([FromBody] startNewWorkArg arg)
+        public async Task<dynamic> startNewWork([FromForm] startNewWorkArg arg)
         {
 
             var resp = new AppResponse()
@@ -382,7 +382,7 @@ namespace Kanoon.Controllers
 
         [HttpPost("finishCurrentWork")]
         //[Authorize]
-        public async Task<dynamic> finishCurrentWork([FromBody] finishCurrentWorkArg arg)
+        public async Task<dynamic> finishCurrentWork([FromForm] finishCurrentWorkArg arg)
         {
 
             var resp = new AppResponse()
@@ -446,7 +446,7 @@ namespace Kanoon.Controllers
 
         [HttpPost("getWorkListForUser")]
         //[Authorize]
-        public dynamic getWorkListForUser([FromBody] getWorkListForUserArg arg)
+        public dynamic getWorkListForUser([FromForm] getWorkListForUserArg arg)
         {
 
             var resp = new AppResponse()
