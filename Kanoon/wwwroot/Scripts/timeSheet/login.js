@@ -20,19 +20,19 @@ $(document).ready(function () {
 
                                 	console.log(data);
 
-                                if (data.data.success == 0) {
-                                    alert(data.data.msg);
-                                }else if (data.data.success == 1) {
+                                if (data.Data.success == 0) {
+                                    alert(data.Data.msg);
+                                }else if (data.Data.success == 1) {
 
-                                    localStorage.setItem('userId', data.data.userId);
-                                    localStorage.setItem('Name', data.data.name);
-                                    localStorage.setItem('Mobile', data.data.mobile);
-                                    localStorage.setItem('rId', data.data.roleId);
+                                    localStorage.setItem('userId', data.Data.userId);
+                                    localStorage.setItem('Name', data.Data.Name);
+                                    localStorage.setItem('Mobile', data.Data.Mobile);
+                                    localStorage.setItem('rId', data.Data.RoleId);
                                     localStorage.setItem('isUserLoggedIn', 'T');
-                                    if (data.data.roleId == 1 || data.data.roleId == 31 || data.data.roleId == 111 || localStorage['rId'] == 99) {
+                                    if (data.Data.RoleId == 1 || data.Data.RoleId == 31 || data.Data.RoleId == 111 || localStorage['rId'] == 99) {
                                         window.location.href = "adminReport";
 
-                                    } else if ((data.data.roleId >= 2 && data.data.roleId < 31) || data.data.roleId==999) {
+                                    } else if ((data.Data.RoleId >= 2 && data.Data.RoleId < 31) || data.Data.RoleId ==999) {
                                         window.location.href = "main";
                                     }
                                     

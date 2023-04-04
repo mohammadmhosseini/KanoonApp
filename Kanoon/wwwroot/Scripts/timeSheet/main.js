@@ -155,16 +155,16 @@ $(document).ready(function () {
     }).done(function (returnedData) {
         console.log(returnedData);
         document.getElementById('loading').style.display = "none";
-        HeadRoleId = returnedData.data.headRoleId;
+        HeadRoleId = returnedData.Data.headRoleId;
         console.log(HeadRoleId);
      
        
-        if (returnedData.data.success == 1) {
+        if (returnedData.Data.success == 1) {
             isFinished = false;
-            console.log(returnedData.data.startWorkDate);
-            lastStartTime = returnedData.data.startWorkDate;
-            nowTime = returnedData.data.nowTime;
-            lastDuration = returnedData.data.lastDuration;
+            console.log(returnedData.Data.startWorkDate);
+            lastStartTime = returnedData.Data.startWorkDate;
+            nowTime = returnedData.Data.nowTime;
+            lastDuration = returnedData.Data.lastDuration;
             //startTime();
           
 
@@ -185,7 +185,7 @@ $(document).ready(function () {
             document.getElementById('clockButton').style.backgroundColor = "lawngreen";
             document.getElementById('clockButton').innerHTML = "شروع";
 
-            if (returnedData.data.headRoleId == 1) {
+            if (returnedData.Data.headRoleId == 1) {
                 getUserWorksList();
             }
         }
@@ -232,7 +232,7 @@ function getUserWorksList() {
         $("#selectWork").append('<option value=' + 0 + '>انتخاب کار فرعی</option>');
       
         
-        $.each(returnedData.data.projectList, function (key, value) {
+        $.each(returnedData.Data.projectList, function (key, value) {
           
               
                 $("#selectProject").append('<option value=' + value.a.ProjectId + '>' + value.ProjectTitle + '</option>');
@@ -283,7 +283,7 @@ function getDefinedWork(projectId) {
         var option = document.createElement("option");
         $("#selectDefinedWork").append('<option value=' + 0 + '>انتخاب کار اصلی</option>');
        
-        $.each(returnedData.data.definedWorkList, function (key, value) {
+        $.each(returnedData.Data.definedWorkList, function (key, value) {
             
                 $("#selectDefinedWork").append('<option value=' + value.a.DefinedWorkId + '>' + value.DefinedWorkTitle + '</option>');
 
@@ -331,7 +331,7 @@ function getWork(definedWorkId) {
         
         $("#selectWork").append('<option value=' + 0 + '>انتخاب کار فرعی</option>');
 
-        $.each(returnedData.data.workList, function (key, value) {
+        $.each(returnedData.Data.workList, function (key, value) {
             if (value.a.WorkTitle != '') {
                 $("#selectWork").append('<option value=' + value.a.Id + '>' + value.a.WorkTitle + '</option>');
 
@@ -507,9 +507,9 @@ function insertNewWorkTitle() {
 
             }).done(function (returnedData) {
                 console.log(returnedData);
-                if (returnedData.data.success == 1) {
+                if (returnedData.Data.success == 1) {
 
-                    alert(returnedData.data.message);
+                    alert(returnedData.Data.message);
                     window.location.reload();
 
                 }
@@ -603,9 +603,9 @@ function setTime() {
 
             }).done(function (returnedData) {
                 console.log(returnedData);
-                if (returnedData.data.success == 1) {
+                if (returnedData.Data.success == 1) {
                     document.getElementById('loading').style.display = "none";
-                    alert(returnedData.data.Message);
+                    alert(returnedData.Data.Message);
                     document.getElementById('selectWork').style.display = "none";
                     window.location.reload();
                         
@@ -668,7 +668,7 @@ function setTime() {
                 }
 
             }).done(function (returnedData) {
-                if (returnedData.data.success == 1) {
+                if (returnedData.Data.success == 1) {
                     document.getElementById('loading').style.display = "none";
                     alert('زمان پایان به کار شما با موفقیت ثبت شد.');
                     window.location.reload();
@@ -722,11 +722,11 @@ function getGroupCode() {
        
        
     //   console.log(returnedData);
-        localStorage.setItem('GroupCode', returnedData.data.groupCode);
-        localStorage.setItem('AreaCode', returnedData.data.areaCode);
-        localStorage.setItem('OfficeCode', returnedData.data.officeCode);
-        localStorage.setItem('StateCode', returnedData.data.stateCode);
-        localStorage.setItem('Sex', returnedData.data.sex);
+        localStorage.setItem('GroupCode', returnedData.Data.groupCode);
+        localStorage.setItem('AreaCode', returnedData.Data.areaCode);
+        localStorage.setItem('OfficeCode', returnedData.Data.officeCode);
+        localStorage.setItem('StateCode', returnedData.Data.stateCode);
+        localStorage.setItem('Sex', returnedData.Data.sex);
      
 
         //if (returnedData.Data.groupCode >= 1 && returnedData.Data.groupCode <= 4 && returnedData.Data.sex == false && returnedData.Data.stateCode == 1 ) {
