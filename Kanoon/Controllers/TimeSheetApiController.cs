@@ -510,8 +510,6 @@ namespace Kanoon.Controllers
                 int TodayPersianDate = PersianDateTime.ToPersianDate(todayDate);
                 var user = _appDbContext.tblTimeSheetUser.FirstOrDefault(a => a.Id == arg.userId);
                 int HeadRoleId;
-                //var lastTime = new App().tblTimeSheetUserWork.FirstOrDefault(a => a.UserId == arg.userId && a.EndWorkDate == null);
-                //var persianDates = new App().tblTimeSheetUserWork.DistinctBy(p => p.PersianDate).OrderBy(p => p.PersianDate).Select(p => p.PersianDate).ToList();
                 if (user.RoleId == 31 || user.RoleId == 1 || user.RoleId == 111 || user.RoleId == 99)
                 {
                     HeadRoleId = user.RoleId.To<int>(0);
@@ -617,13 +615,13 @@ namespace Kanoon.Controllers
             public string DefinedWorkTitle { get; set; }
         }
 
-        //public class getUsersArg
-        //{
-        //    public int userId { set; get; }
-        //    public int FromPDate { set; get; }
-        //    public int ToPDate { set; get; }
+        public class getUsersArg
+        {
+            public int userId { set; get; }
+            public int FromPDate { set; get; }
+            public int ToPDate { set; get; }
 
-        //}
+        }
 
         //[HttpPost("getUsers")]
         //public dynamic getUsers([FromForm] getUsersArg arg)
@@ -653,13 +651,13 @@ namespace Kanoon.Controllers
         //        var userList = new List<userInfo>();
         //        var lastMountUserList = new List<userInfo>();
 
-        //        var reportType = 1;
-        //        var adminRoleId = 1;
-        //        var startDate = arg.FromPDate;
-        //        var endDate = arg.ToPDate;
+        //        //var reportType = 1;
+        //        //var adminRoleId = 1;
+        //        //var startDate = arg.FromPDate;
+        //        //var endDate = arg.ToPDate;
 
-        //        userList = _appDbContext.TimeSheetReports.FromSqlRaw("EXEC dbo.TimeSheetReport @ReportType = {0}, @AdminRoleId = {1}, @StartDate = {2}, @EndDate = {3}", reportType, adminRoleId, startDate, endDate).ToList();
-
+        //        //userList = _appDbContext.TimeSheetReports.FromSqlRaw("EXEC dbo.TimeSheetReport @ReportType = {0}, @AdminRoleId = {1}, @StartDate = {2}, @EndDate = {3}", reportType, adminRoleId, startDate, endDate).ToList();
+                
 
         //        using (BLToolkit.Data.DbManager _db = new BLToolkit.Data.DbManager("KanoonApp"))
         //        {
@@ -851,7 +849,7 @@ namespace Kanoon.Controllers
             {
                 var admin = _appDbContext.tblTimeSheetUser.FirstOrDefault(a => a.Id == arg.userId & (a.RoleId == 1 || a.RoleId == 111 || a.RoleId == 31 || a.RoleId == 99));
                 var lastTime = _appDbContext.tblTimeSheetUserWork.FirstOrDefault(a => a.UserId == arg.userId && a.EndWorkDate == null);
-                var persianDates = _appDbContext.tblTimeSheetUserWork.Where(a => a.UserId == arg.userId).DistinctBy(p => p.PersianDate).OrderByDescending(p => p.PersianDate).Select(p => p.PersianDate).ToList();
+                var persianDates = _appDbContext.tblTimeSheetUserWork.Where(a => a.UserId == arg.userId).ToList().DistinctBy(p => p.PersianDate).OrderByDescending(p => p.PersianDate).Select(p => p.PersianDate);
 
                 var userList = _appDbContext.tblTimeSheetUser.Where(a => (a.RoleId == 2 || a.RoleId == 999) && a.HeadRoleId == admin.RoleId);
 
@@ -971,7 +969,7 @@ namespace Kanoon.Controllers
                                     a.WorkTitle,
                                     a.HeadPredictFinishedDate,
 
-                                }).DistinctBy(a => a.Id).ToList();
+                                }).ToList().DistinctBy(a => a.Id);
 
                 resp.Data = new
                 {
