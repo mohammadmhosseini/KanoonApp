@@ -497,7 +497,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getPersianDates")]
-        public dynamic getPersianDates([FromBody] getPersianDatesArg arg)
+        public dynamic getPersianDates([FromForm] getPersianDatesArg arg)
         {
 
             var resp = new AppResponse()
@@ -520,15 +520,15 @@ namespace Kanoon.Controllers
                 {
                     HeadRoleId = user.HeadRoleId.To<int>(0);
                 }
+
                 var persianDates = (from r in _appDbContext.tblTimeSheetUser
-                                    join b in _appDbContext.tblTimeSheetUserWork on r.Id equals b.UserId
-                                    where r.HeadRoleId == HeadRoleId
-                                    select new
-                                    {
-                                        b.PersianDate
+                                   join b in _appDbContext.tblTimeSheetUserWork on r.Id equals b.UserId
+                                   where r.HeadRoleId == HeadRoleId
+                                   select new
+                                   {
+                                       b.PersianDate
 
-                                    }).DistinctBy(p => p.PersianDate).OrderByDescending(p => p.PersianDate).ToList();
-
+                                   }).ToList().DistinctBy(p => p.PersianDate).OrderByDescending(p => p.PersianDate);
 
                 var years = (from r in _appDbContext.tblTimeSheetUser
                              join b in _appDbContext.tblTimeSheetUserWork on r.Id equals b.UserId
@@ -537,7 +537,7 @@ namespace Kanoon.Controllers
                              {
                                  b.PersianDate
 
-                             }).DistinctBy(p => p.PersianDate / 10000).OrderByDescending(p => p.PersianDate / 10000).ToList();
+                             }).ToList().DistinctBy(p => p.PersianDate / 10000).OrderByDescending(p => p.PersianDate / 10000);
 
 
                 var mounts = (from r in _appDbContext.tblTimeSheetUser
@@ -547,7 +547,7 @@ namespace Kanoon.Controllers
                               {
                                   b.PersianDate
 
-                              }).DistinctBy(p => (p.PersianDate % 10000) / 100).OrderBy(p => (p.PersianDate % 10000) / 100).ToList();
+                              }).ToList().DistinctBy(p => (p.PersianDate % 10000) / 100).OrderBy(p => (p.PersianDate % 10000) / 100);
 
 
 
@@ -557,7 +557,7 @@ namespace Kanoon.Controllers
                             select new
                             {
                                 b.PersianDate
-                            }).DistinctBy(p => p.PersianDate % 100).OrderBy(p => p.PersianDate % 100).ToList();
+                            }).ToList().DistinctBy(p => p.PersianDate % 100).OrderBy(p => p.PersianDate % 100);
 
                 List<int> this30Days = new List<int>();
                 for (var i = 0; i < 10; i++)
@@ -591,17 +591,6 @@ namespace Kanoon.Controllers
                     this30Days,
                     onMonthDay,
                 };
-
-
-                //var allUsers = new App().tblTimeSheetUser.Where(a => a.RoleId == 2 && a.isActive == true);
-
-
-
-                //var allUsers = new App().tblTimeSheetUserWork.Where(a => a.UserId == arg.userId).DistinctBy(p => p.PersianDate).OrderBy(p => p.PersianDate).Select(p => p.PersianDate).ToList();
-
-
-
-
             }
             catch (Exception)
             {
@@ -637,7 +626,7 @@ namespace Kanoon.Controllers
         //}
 
         //[HttpPost("getUsers")]
-        //public dynamic getUsers([FromBody] getUsersArg arg)
+        //public dynamic getUsers([FromForm] getUsersArg arg)
         //{
 
         //    var resp = new AppResponse()
@@ -739,7 +728,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("ActiveDeactiveUser")]
-        public dynamic ActiveDeactiveUser([FromBody] ActiveDeactiveUserArg arg)
+        public dynamic ActiveDeactiveUser([FromForm] ActiveDeactiveUserArg arg)
         {
 
             var resp = new AppResponse()
@@ -800,7 +789,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getUserDayTimes")]
-        public dynamic getUserDayTimes([FromBody] getUserDayTimesArg arg)
+        public dynamic getUserDayTimes([FromForm] getUserDayTimesArg arg)
         {
 
             var resp = new AppResponse()
@@ -851,7 +840,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getUsersOfWorkTitle")]
-        public dynamic getUsersOfWorkTitle([FromBody] getUsersOfWorkTitleArg arg)
+        public dynamic getUsersOfWorkTitle([FromForm] getUsersOfWorkTitleArg arg)
         {
 
             var resp = new AppResponse()
@@ -903,7 +892,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("insertNewWork")]
-        public dynamic insertNewWork([FromBody] insertNewWorkArg arg)
+        public dynamic insertNewWork([FromForm] insertNewWorkArg arg)
         {
 
             var resp = new AppResponse()
@@ -954,7 +943,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getNotVerifiedWorkList")]
-        public dynamic getNotVerifiedWorkList([FromBody] getNotVerifiedWorkListArg arg)
+        public dynamic getNotVerifiedWorkList([FromForm] getNotVerifiedWorkListArg arg)
         {
 
             var resp = new AppResponse()
@@ -1008,9 +997,9 @@ namespace Kanoon.Controllers
             public int workId { set; get; }
 
         }
-        
+
         [HttpPost("verifyNewWork")]
-        public dynamic verifyNewWork([FromBody] verifyNewWorkArg arg)
+        public dynamic verifyNewWork([FromForm] verifyNewWorkArg arg)
         {
 
             var resp = new AppResponse()
@@ -1060,7 +1049,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("deleteWorkTitle")]
-        public dynamic deleteWorkTitle([FromBody] deleteWorkTitleArg arg)
+        public dynamic deleteWorkTitle([FromForm] deleteWorkTitleArg arg)
         {
 
             var resp = new AppResponse()
@@ -1111,7 +1100,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getUserWorkList")]
-        public dynamic getUserWorkList([FromBody] getUserWorkListArg arg)
+        public dynamic getUserWorkList([FromForm] getUserWorkListArg arg)
         {
 
             var resp = new AppResponse()
@@ -1282,7 +1271,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("insertNewProject")]
-        public dynamic insertNewProject([FromBody] insertNewProjectArg arg)
+        public dynamic insertNewProject([FromForm] insertNewProjectArg arg)
         {
 
             var resp = new AppResponse()
@@ -1329,7 +1318,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getProjectList")]
-        public dynamic getProjectList([FromBody] getProjectListArg arg)
+        public dynamic getProjectList([FromForm] getProjectListArg arg)
         {
 
             var resp = new AppResponse()
@@ -1371,7 +1360,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("ActiveDeactiveProject")]
-        public dynamic ActiveDeactiveProject([FromBody] ActiveDeactiveProjectArg arg)
+        public dynamic ActiveDeactiveProject([FromForm] ActiveDeactiveProjectArg arg)
         {
 
             var resp = new AppResponse()
@@ -1416,7 +1405,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("EditProjectTitle")]
-        public dynamic EditProjectTitle([FromBody] EditProjectTitleArg arg)
+        public dynamic EditProjectTitle([FromForm] EditProjectTitleArg arg)
         {
 
             var resp = new AppResponse()
@@ -1460,7 +1449,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("insertNewDefinedWork")]
-        public dynamic insertNewDefinedWork([FromBody] insertNewDefinedWorkArg arg)
+        public dynamic insertNewDefinedWork([FromForm] insertNewDefinedWorkArg arg)
         {
 
             var resp = new AppResponse()
@@ -1513,7 +1502,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getDefinedWorkList")]
-        public dynamic getDefinedWorkList([FromBody] getDefinedWorkListArg arg)
+        public dynamic getDefinedWorkList([FromForm] getDefinedWorkListArg arg)
         {
 
             var resp = new AppResponse()
@@ -1555,7 +1544,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("ActiveDeactiveDefinedWork")]
-        public dynamic ActiveDeactiveDefinedWork([FromBody] ActiveDeactiveDefinedWorkArg arg)
+        public dynamic ActiveDeactiveDefinedWork([FromForm] ActiveDeactiveDefinedWorkArg arg)
         {
 
             var resp = new AppResponse()
@@ -1600,7 +1589,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("EditDefinedWorkTitle")]
-        public dynamic EditDefinedWorkTitle([FromBody] EditDefinedWorkTitleArg arg)
+        public dynamic EditDefinedWorkTitle([FromForm] EditDefinedWorkTitleArg arg)
         {
 
             var resp = new AppResponse()
@@ -1645,7 +1634,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getUserTimesofDay")]
-        public dynamic getUserTimesofDay([FromBody] getUserTimesofDayArg arg)
+        public dynamic getUserTimesofDay([FromForm] getUserTimesofDayArg arg)
         {
 
             var resp = new AppResponse()
@@ -1688,7 +1677,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getUsersOfPayroll")]
-        public dynamic getUsersOfPayroll([FromBody] getUsersOfPayrollArg arg)
+        public dynamic getUsersOfPayroll([FromForm] getUsersOfPayrollArg arg)
         {
 
             var resp = new AppResponse()
@@ -1735,7 +1724,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("insertUserPayroll")]
-        public dynamic insertUserPayroll([FromBody] insertUserPayrollArg arg)
+        public dynamic insertUserPayroll([FromForm] insertUserPayrollArg arg)
         {
 
             var resp = new AppResponse()
@@ -1788,7 +1777,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getCategory")]
-        public dynamic getCategory([FromBody] getCategoryArg arg)
+        public dynamic getCategory([FromForm] getCategoryArg arg)
         {
 
             var resp = new AppResponse()
@@ -1842,7 +1831,7 @@ namespace Kanoon.Controllers
         }
 
         [HttpPost("getUsers2")]
-        public dynamic getUsers2([FromBody] getUsers2Arg arg)
+        public dynamic getUsers2([FromForm] getUsers2Arg arg)
         {
 
             var resp = new AppResponse()

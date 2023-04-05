@@ -585,7 +585,7 @@ function setTime() {
                 data: {
                     userId: localStorage['userId'],
                     startDesctiption: $("#description").val(),
-                    workId: $("#selectWork").val(),
+                    workId: $("#selectWork").val() ?? 0,
                 },
                 headers: {
                     'Authorization': 'bearer' + ' ' + localStorage['StudentId'],
